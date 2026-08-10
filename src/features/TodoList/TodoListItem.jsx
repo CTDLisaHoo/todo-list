@@ -1,8 +1,8 @@
 //features/TodoList/TodoListItem.jsx
 
 import { useRef, useState } from 'react';
-import TextInputWithLabel from '../../shared/TextInputWithLabel';
-import { isValidTodoTitle } from '../../utils/todoValidation';
+import TextInputWithLabel from '../../shared/TextInputWithLabel.jsx';
+import { isValidTodoTitle } from '../../utils/todoValidation.js';
 
 function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   const inputRef = useRef();
@@ -22,10 +22,14 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
     if (!isEditing) return;
 
     event.preventDefault();
-    
+
+    if (!isValidTodoTitle(workingTitle)) {
+      return;
+    }
+
     onUpdateTodo({
       ...todo,
-      title: workingTitle,
+      title: workingTitle.trim(),
     });
 
     setIsEditing(false);

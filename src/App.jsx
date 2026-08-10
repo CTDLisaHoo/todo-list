@@ -29,14 +29,21 @@ function App() {
   };
 
   const updateTodo = (editedTodo) => {
-  const updatedTodos = todoList.map((todo) =>
-    todo.id === editedTodo.id
-      ? { ...todo, ...editedTodo }
-      : todo
-  );
+  const updatedTodos = todoList.map((todo) => {
+    if (todo.id === editedTodo.id) {
+      const { id, ...todoDetails } = editedTodo;
 
-  setTodoList(updatedTodos);
-};
+      return {
+        id,
+        ...todoDetails,
+      };
+    }
+
+    return todo;
+  });
+
+    setTodoList(updatedTodos);
+  };
 
   return (
     <div>
