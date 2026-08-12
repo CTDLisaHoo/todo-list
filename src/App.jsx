@@ -31,19 +31,14 @@ function App() {
   const updateTodo = (editedTodo) => {
   const updatedTodos = todoList.map((todo) => {
     if (todo.id === editedTodo.id) {
-      const { id, ...todoDetails } = editedTodo;
-
-      return {
-        id,
-        ...todoDetails,
-      };
+      return { ...editedTodo };
     }
 
     return todo;
   });
 
-    setTodoList(updatedTodos);
-  };
+  setTodoList(updatedTodos);
+};
 
   return (
     <div>

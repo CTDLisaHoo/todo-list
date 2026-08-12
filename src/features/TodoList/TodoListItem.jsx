@@ -29,7 +29,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
 
     onUpdateTodo({
       ...todo,
-      title: workingTitle.trim(),
+      title: workingTitle,
     });
 
     setIsEditing(false);
