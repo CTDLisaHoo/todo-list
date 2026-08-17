@@ -51,6 +51,8 @@ function TodosPage({ token }) {
   }, [token]);
 
   const addTodo = async (todoTitle) => {
+    setError('');
+
     const newTodo = {
       id: Date.now(),
       title: todoTitle,
@@ -97,12 +99,13 @@ function TodosPage({ token }) {
   };
 
   const completeTodo = async (id) => {
+    setError('');
+
     const originalTodo = todoList.find((todo) => todo.id === id);
 
     if (!originalTodo) {
       return;
     }
-
     // Optimistically mark as completed
     setTodoList((previous) =>
       previous.map((todo) =>
@@ -141,6 +144,8 @@ function TodosPage({ token }) {
   };
 
   const updateTodo = async (editedTodo) => {
+    setError('');
+
     const originalTodo = todoList.find(
       (todo) => todo.id === editedTodo.id
     );
