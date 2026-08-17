@@ -1,4 +1,4 @@
-//features/Todos/TodoPage.jsx
+//features/Todos/TodosPage.jsx
 
 import { useEffect, useState } from 'react';
 import TodoList from './TodoList/TodoList';
