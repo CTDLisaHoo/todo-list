@@ -1,6 +1,6 @@
 //shared/Header.jsx
 
-function Header() {
+function Header({ token, onSetToken, onSetEmail }) {
   return(
     <div>
         <h1>Todo List</h1>
