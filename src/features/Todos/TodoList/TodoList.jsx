@@ -1,4 +1,4 @@
-//features/TodoList/TodoList.jsx
+//features/Todos/TodoList/TodoList.jsx
 
 import TodoListItem from './TodoListItem.jsx';
 
