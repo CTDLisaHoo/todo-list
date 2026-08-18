@@ -7,12 +7,18 @@ import Logon from './features/Logon';
 import TodosPage from './features/Todos/TodosPage';
 
 function App() {
-  const [email, setEmail] = useState('');
+  //const [email, setEmail] = useState('');
   const [token, setToken] = useState('');
 
   return (
     <div>
-      <Header/>
+      <Header
+        email={email}
+        token={token}
+        onSetToken={setToken}
+        onSetEmail={setEmail}
+      />
+      
       {token ? (
         <TodosPage token={token} />
       ) : (
