@@ -31,7 +31,7 @@ function TodosPage({ token }) {
         });
 
         if (response.status === 401) {
-          throw new Error('unauthorized');
+          throw new Error('Permission denied');
         }
 
         if (!response.ok) {
@@ -39,7 +39,7 @@ function TodosPage({ token }) {
         }
 
         const data = await response.json();
-        setTodoList(data.tasks);
+        setTodoList(data.tasks ?? []);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -104,6 +104,7 @@ function TodosPage({ token }) {
     const originalTodo = todoList.find((todo) => todo.id === id);
 
     if (!originalTodo) {
+      setError('Unable to find this todo. Please try again.');
       return;
     }
     // Optimistically mark as completed
@@ -151,6 +152,7 @@ function TodosPage({ token }) {
     );
 
     if (!originalTodo) {
+      setError('Unable to find this todo. Please try again.');
       return;
     }
 
