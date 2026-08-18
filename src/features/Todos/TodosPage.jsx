@@ -31,7 +31,7 @@ function TodosPage({ token }) {
         });
 
         if (response.status === 401) {
-          throw new Error('Permission denied');
+          throw new Error('Unauthorized');
         }
 
         if (!response.ok) {
@@ -46,7 +46,7 @@ function TodosPage({ token }) {
         setIsTodoListLoading(false);
       }
     }
-
+    
     fetchTodos();
   }, [token]);
 
