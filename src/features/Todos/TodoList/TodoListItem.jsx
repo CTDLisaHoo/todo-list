@@ -1,8 +1,8 @@
-//features/TodoList/TodoListItem.jsx
+//features/Todos/TodoList/TodoListItem.jsx
 
 import { useRef, useState } from 'react';
-import TextInputWithLabel from '../../shared/TextInputWithLabel.jsx';
-import { isValidTodoTitle } from '../../utils/todoValidation.js';
+import TextInputWithLabel from '../../../shared/TextInputWithLabel.jsx';
+import { isValidTodoTitle } from '../../../utils/todoValidation.js';
 
 function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
   const inputRef = useRef();
@@ -53,8 +53,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo }) {
             </button>
 
             <button
-              type="button"
-              onClick={handleUpdate}
+              type="submit"
               disabled={!isValidTodoTitle(workingTitle)}
             >
               Update
