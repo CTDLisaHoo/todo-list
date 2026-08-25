@@ -1,13 +1,33 @@
 //features/Todos/TodosPage.jsx
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import TodoList from './TodoList/TodoList';
 import TodoForm from './TodoForm';
+import SortBy from '../../shared/SortBy';
+import useDebounce from '../../utils/useDebounce';
+import FilterInput from '../../shared/FilterInput';
 
 function TodosPage({ token }) {
   const [todoList, setTodoList] = useState([]);
   const [error, setError] = useState('');
   const [isTodoListLoading, setIsTodoListLoading] = useState(false);
+
+  const [sortBy, setSortBy] = useState('createdAt');
+  const [sortDirection, setSortDirection] = useState('desc');
+
+  const [filterTerm, setFilterTerm] = useState('');
+  const [dataVersion, setDataVersion] = useState(0);
+  const [filterError, setFilterError] = useState('');
+
+  const debouncedFilterTerm = useDebounce(filterTerm, 300);
+
+  const handleFilterChange = (newTerm) => {
+    setFilterTerm(newTerm);
+  };
+
+  const invalidateCache = useCallback(() => {
+    setDataVersion((prev) => prev + 1);
+  }, []);
 
   useEffect(() => {
     if (!token) {
@@ -19,9 +39,17 @@ function TodosPage({ token }) {
       setError('');
 
       try {
-        const params = new URLSearchParams({
+        const paramsObject = {
+          sortBy,
+          sortDirection,
           limit: 100,
-        });
+        };
+
+        if (debouncedFilterTerm) {
+          paramsObject.find = debouncedFilterTerm;
+        }
+
+        const params = new URLSearchParams(paramsObject);
 
         const response = await fetch(`/api/tasks?${params}`, {
           headers: {
@@ -39,16 +67,28 @@ function TodosPage({ token }) {
         }
 
         const data = await response.json();
+
         setTodoList(data.tasks ?? []);
+        setFilterError('');
       } catch (error) {
-        setError(error.message);
+        if (
+          debouncedFilterTerm ||
+          sortBy !== 'createdAt' ||
+          sortDirection !== 'desc'
+        ) {
+          setFilterError(
+            `Error filtering/sorting todos: ${error.message}`
+          );
+        } else {
+          setError(`Error fetching todos: ${error.message}`);
+        }
       } finally {
         setIsTodoListLoading(false);
       }
     }
-    
+
     fetchTodos();
-  }, [token]);
+  }, [token, sortBy, sortDirection, debouncedFilterTerm]);
 
   const addTodo = async (todoTitle) => {
     setError('');
@@ -59,7 +99,6 @@ function TodosPage({ token }) {
       isCompleted: false,
     };
 
-    // Optimistically add the todo immediately
     setTodoList((previous) => [...previous, newTodo]);
 
     try {
@@ -82,14 +121,14 @@ function TodosPage({ token }) {
 
       const data = await response.json();
 
-      // Replace temporary todo with the real server todo
       setTodoList((previous) =>
         previous.map((todo) =>
           todo.id === newTodo.id ? data : todo
         )
       );
+
+      invalidateCache();
     } catch (error) {
-      // Remove failed todo
       setTodoList((previous) =>
         previous.filter((todo) => todo.id !== newTodo.id)
       );
@@ -107,7 +146,7 @@ function TodosPage({ token }) {
       setError('Unable to find this todo. Please try again.');
       return;
     }
-    // Optimistically mark as completed
+
     setTodoList((previous) =>
       previous.map((todo) =>
         todo.id === id
@@ -132,8 +171,9 @@ function TodosPage({ token }) {
       if (!response.ok) {
         throw new Error('Failed to complete todo');
       }
+
+      invalidateCache();
     } catch (error) {
-      // Roll back to original todo
       setTodoList((previous) =>
         previous.map((todo) =>
           todo.id === id ? originalTodo : todo
@@ -156,7 +196,6 @@ function TodosPage({ token }) {
       return;
     }
 
-    // Optimistically update the todo
     setTodoList((previous) =>
       previous.map((todo) =>
         todo.id === editedTodo.id ? editedTodo : todo
@@ -180,8 +219,9 @@ function TodosPage({ token }) {
       if (!response.ok) {
         throw new Error('Failed to update todo');
       }
+
+      invalidateCache();
     } catch (error) {
-      // Roll back to original todo
       setTodoList((previous) =>
         previous.map((todo) =>
           todo.id === editedTodo.id ? originalTodo : todo
@@ -190,6 +230,13 @@ function TodosPage({ token }) {
 
       setError(error.message);
     }
+  };
+
+  const resetFilters = () => {
+    setFilterTerm('');
+    setSortBy('createdAt');
+    setSortDirection('desc');
+    setFilterError('');
   };
 
   return (
@@ -203,7 +250,33 @@ function TodosPage({ token }) {
         </div>
       )}
 
+      {filterError && (
+        <div>
+          <p>{filterError}</p>
+
+          <button type="button" onClick={() => setFilterError('')}>
+            Clear Filter Error
+          </button>
+
+          <button type="button" onClick={resetFilters}>
+            Reset Filters
+          </button>
+        </div>
+      )}
+
       {isTodoListLoading && <p>Loading todos...</p>}
+
+      <SortBy
+        sortBy={sortBy}
+        sortDirection={sortDirection}
+        onSortByChange={setSortBy}
+        onSortDirectionChange={setSortDirection}
+      />
+
+      <FilterInput
+        filterTerm={filterTerm}
+        onFilterChange={handleFilterChange}
+      />
 
       <TodoForm onAddTodo={addTodo} />
 
@@ -211,6 +284,7 @@ function TodosPage({ token }) {
         todoList={todoList}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
+        dataVersion={dataVersion}
       />
     </div>
   );
