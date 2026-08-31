@@ -16,14 +16,14 @@ function Logon() {
     setIsLoggingOn(true);
     setAuthError('');
 
-  const result = await login(email, password);
+    const result = await login(email, password);
 
     if (!result.success) {
       setAuthError(result.error);
     }
 
     setIsLoggingOn(false);
-  } 
+  }
 
   return (
     <div className="authFormScreen">

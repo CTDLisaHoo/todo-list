@@ -4,7 +4,7 @@ export const initialTodoState = {
   todoList: [],
   error: '',
   filterError: '',
-  isTodoListLoading: false,
+  isTodoListLoading: true,
   sortBy: 'createdAt',
   sortDirection: 'asc',
   filterTerm: '',
@@ -57,7 +57,7 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.FETCH_SUCCESS:
       return {
         ...state,
-        todoList: action.payload,
+        todoList: action.payload.todos,
         isTodoListLoading: false,
         error: '',
         filterError: '',
@@ -67,9 +67,14 @@ export function todoReducer(state, action) {
       return {
         ...state,
         isTodoListLoading: false,
-        error: action.payload.error || '',
-        filterError: action.payload.filterError || '',
+        error: action.payload.isFilterError
+          ? ''
+          : action.payload.message,
+        filterError: action.payload.isFilterError
+          ? action.payload.message
+          : '',
       };
+
   
     // --------------------------------
     // ADD TODO
@@ -138,6 +143,7 @@ export function todoReducer(state, action) {
             : todo
         ),
         error: action.payload.error,
+        filterError: '',
       };
 
     // --------------------------------
@@ -171,6 +177,7 @@ export function todoReducer(state, action) {
             : todo
         ),
         error: action.payload.error,
+        filterError: '',
       };
 
     // --------------------------------

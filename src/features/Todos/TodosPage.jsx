@@ -78,7 +78,9 @@ function TodosPage() {
         if (response.status === 404 && debouncedFilterTerm) {
           dispatch({
             type: TODO_ACTIONS.FETCH_SUCCESS,
-            payload: [],
+            payload: {
+              todos: [],
+            },
           });
           return;
         }
@@ -91,25 +93,24 @@ function TodosPage() {
 
         dispatch({
           type: TODO_ACTIONS.FETCH_SUCCESS,
-          payload: data.tasks ?? [],
+          payload: {
+            todos: data.tasks ?? [],
+          },
         });
         
       } catch (error) {
-        const isFilterOrSort =
-          debouncedFilterTerm ||
+        const isFilterError =
+          Boolean(debouncedFilterTerm) ||
           sortBy !== 'createdAt' ||
           sortDirection !== 'asc';
 
         dispatch({
           type: TODO_ACTIONS.FETCH_ERROR,
           payload: {
-            error: isFilterOrSort
-              ? ''
-              : `Error fetching todos: ${error.message}`,
-
-            filterError: isFilterOrSort
+            message: isFilterError
               ? `Error filtering/sorting todos: ${error.message}`
-              : '',
+              : `Error fetching todos: ${error.message}`,
+            isFilterError,
           },
         });
       }
