@@ -106,6 +106,8 @@ export function todoReducer(state, action) {
           (todo) => todo.id !== action.payload.tempId
         ),
         error: action.payload.error,
+        filterError: "",
+        isTodoListLoading: false,
       };
 
     // --------------------------------
@@ -188,12 +190,14 @@ export function todoReducer(state, action) {
         ...state,
         sortBy: action.payload.sortBy,
         sortDirection: action.payload.sortDirection,
+        filterError: '',
       };
 
     case TODO_ACTIONS.SET_FILTER:
       return{
         ...state,
-        filterTerm: action.payload,
+        filterTerm: action.payload.filterTerm,
+        filterError: '',
       }; 
       
     case TODO_ACTIONS.CLEAR_ERROR:
