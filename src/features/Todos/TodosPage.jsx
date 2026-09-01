@@ -36,7 +36,9 @@ function TodosPage() {
   const handleFilterChange = (newTerm) => {
     dispatch({
       type: TODO_ACTIONS.SET_FILTER,
-      payload: newTerm,
+      payload: {
+        filterTerm: newTerm,
+      },
     });
   };
 
