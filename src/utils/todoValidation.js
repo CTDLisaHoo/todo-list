@@ -1,4 +1,4 @@
-// src/utils/todoValidation.js
+//utils/todoValidation.js
 
 export function isValidTodoTitle(title) {
   return title.trim() !== '';
