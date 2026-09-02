@@ -179,6 +179,13 @@ function TodosPage() {
     const originalTodo = todoList.find((todo) => todo.id === id);
 
     if (!originalTodo) {
+      dispatch({
+        type: TODO_ACTIONS.SET_ERROR,
+        payload: {
+          message: 'Unable to find this todo. Please try again.',
+        },
+      });
+
       return;
     }
 
@@ -231,6 +238,13 @@ function TodosPage() {
     );
 
     if (!originalTodo) {
+      dispatch({
+        type: TODO_ACTIONS.SET_ERROR,
+        payload: {
+          message: 'Unable to find this todo. Please try again.',
+        },
+      });
+
       return;
     }
 

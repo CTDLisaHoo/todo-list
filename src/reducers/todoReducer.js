@@ -106,8 +106,7 @@ export function todoReducer(state, action) {
           (todo) => todo.id !== action.payload.tempId
         ),
         error: action.payload.error,
-        filterError: "",
-        isTodoListLoading: false,
+        filterError: '',
       };
 
     // --------------------------------
@@ -146,7 +145,6 @@ export function todoReducer(state, action) {
         ),
         error: action.payload.error,
         filterError: '',
-        isTodoListLoading: false,
       };
 
     // --------------------------------
@@ -181,7 +179,6 @@ export function todoReducer(state, action) {
         ),
         error: action.payload.error,
         filterError: '',
-        isTodoListLoading: false,
       };
 
     // --------------------------------
@@ -201,6 +198,12 @@ export function todoReducer(state, action) {
         filterTerm: action.payload.filterTerm,
         filterError: '',
       }; 
+
+    case TODO_ACTIONS.SET_ERROR:
+      return {
+        ...state,
+        error: action.payload.message,
+      };
       
     case TODO_ACTIONS.CLEAR_ERROR:
       return {
