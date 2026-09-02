@@ -10,15 +10,11 @@ function App() {
   const { isAuthenticated } = useAuth();
 
   return (
-    <div>
+    <>
       <Header />
 
-      {isAuthenticated ? (
-        <TodosPage />
-      ) : (
-        <Logon />
-      )}
-    </div>
+      {isAuthenticated ? <TodosPage /> : <Logon />}
+    </>
   );
 }
 

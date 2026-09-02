@@ -118,7 +118,7 @@ function TodosPage() {
       }
     }
     fetchTodos();
-  }, [ token, sortBy, sortDirection, debouncedFilterTerm, dataVersion,]);
+  }, [ token, sortBy, sortDirection, debouncedFilterTerm]);
 
   // --------------------------------
   // ADD TODO
@@ -132,8 +132,11 @@ function TodosPage() {
 
     dispatch({
       type: TODO_ACTIONS.ADD_TODO_START,
-      payload: newTodo,
+      payload: {
+        todo: newTodo,
+      },
     });
+
  
     try {
       const response = await fetch('/api/tasks', {

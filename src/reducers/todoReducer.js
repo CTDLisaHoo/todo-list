@@ -35,6 +35,7 @@ export const TODO_ACTIONS = {
     //UI operations
     SET_SORT: 'SET_SORT', 
     SET_FILTER: 'SET_FILTER', 
+    SET_ERROR: 'SET_ERROR',
     CLEAR_ERROR: 'CLEAR_ERROR',
     CLEAR_FILTER_ERROR: 'CLEAR_FILTER_ERROR',
     RESET_FILTERS: 'RESET_FILTERS',
@@ -82,7 +83,7 @@ export function todoReducer(state, action) {
     case TODO_ACTIONS.ADD_TODO_START:
       return {
         ...state,
-        todoList: [...state.todoList, action.payload],
+        todoList: [...state.todoList, action.payload.todo],
         error: '',
       };
       
