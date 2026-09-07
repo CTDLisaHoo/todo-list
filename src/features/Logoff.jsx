@@ -1,25 +1,28 @@
 // features/Logoff.jsx
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 
 function Logoff() {
   const { logout } = useAuth();
+  const navigate = useNavigate();
 
-  const [logoutError, setLogoutError] = useState('');
+  const [logoutError, setError] = useState('');
   const [isLoggingOff, setIsLoggingOff] = useState(false);
 
-  async function handleLogout() {
+  async function handleLogoff() {
     setIsLoggingOff(true);
-    setLogoutError('');
+    setError('');
 
     const result = await logout();
 
-    if (!result.success) {
-      setLogoutError(result.error);
+    if (result.success) {
+      navigate('/login');
+    } else {
+      setError(result.error);
+      setIsLoggingOff(false);
     }
-
-    setIsLoggingOff(false);
   }
 
   return (
@@ -32,7 +35,7 @@ function Logoff() {
 
       <button
         type="button"
-        onClick={handleLogout}
+        onClick={handleLogoff}
         disabled={isLoggingOff}
       >
         {isLoggingOff ? 'Logging out...' : 'Logout'}
@@ -42,4 +45,3 @@ function Logoff() {
 }
 
 export default Logoff;
-
