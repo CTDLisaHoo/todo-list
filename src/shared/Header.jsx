@@ -2,6 +2,7 @@
 
 import { useAuth } from '../contexts/AuthContext';
 import Logoff from '../features/Logoff';
+import Navigation from './Navigation';
 
 function Header() {
   const { isAuthenticated } = useAuth();
@@ -9,7 +10,7 @@ function Header() {
   return(
     <div>
         <h1>Todo List</h1>
-
+        <Navigation />
         {isAuthenticated && <Logoff />}
     </div> 
   );
