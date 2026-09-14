@@ -17,7 +17,7 @@ function Navigation() {
       <ul className={styles.navList}>
         <li>
           <NavLink className={navLinkStyles} to="/about">
-            AboutPage
+            About
           </NavLink>
         </li>
 
@@ -25,20 +25,20 @@ function Navigation() {
           <>
             <li>
               <NavLink className={navLinkStyles} to="/todos">
-                TodosPage
+                Todos
               </NavLink>
             </li>
 
             <li>
               <NavLink className={navLinkStyles} to="/profile">
-                ProfilePage
+                Profile
               </NavLink>
             </li>
           </>
         ) : (
           <li>
             <NavLink className={navLinkStyles} to="/login">
-              LoginPage
+              Login
             </NavLink>
           </li>
         )}

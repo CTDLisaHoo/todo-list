@@ -96,6 +96,17 @@ color: var(--color-danger);
 margin: 0;
 }
 
+.inputError {
+  margin: 0.25rem 0 0.75rem;
+  color: var(--color-danger);
+  font-size: 0.875rem;
+}
+
+input[aria-invalid='true'] {
+  border-color: var(--color-danger);
+}
+
+
 /* Mobile */
 @media (max-width: 480px) {
 .authFormScreen {

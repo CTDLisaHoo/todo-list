@@ -4,7 +4,7 @@ A responsive Todo List application built with React and Vite. The application he
 
 ## 🚀 Live Demo
 
-[View Live Application](https://todo-list-todo-list4.vercel.app/login)
+[View Live Application](https://todo-list-todo-list4.vercel.app)
 
 ## ✨ Features
 
@@ -20,7 +20,7 @@ A responsive Todo List application built with React and Vite. The application he
 - Protected routes for authenticated users
 - Client-side form validation
 - Maximum 100-character todo title limit
-- Loading and error states
+- Styled loading, error, and empty states
 - Responsive design for desktop, tablet, and mobile
 - Touch-friendly controls and interactions
 
@@ -48,7 +48,7 @@ A responsive Todo List application built with React and Vite. The application he
 
 ![About mobile view](./screenshots/mobile-about.png)
 ![Login mobile view](./screenshots/mobile-login.png)
-![Not Found page desktop view](./screenshots/mobile-not-found-page.png)
+![Not Found page mobile view](./screenshots/mobile-not-found-page.png)
 ![Profile mobile view](./screenshots/mobile-profile.png)
 ![Todos mobile view](./screenshots/mobile-todos.png)
 
@@ -69,26 +69,27 @@ Make sure you have the following installed:
    
 2. Navigate to the project directory:
 
-    cd todo-list
+    `cd todo-list`
    
 3. Install the project dependencies:
 
-   npm install
+   `npm install`
    
 ### Running the Development Server
 
 Start the development server by running:
 
-npm run dev
+- `npm run dev` — Starts the Vite development server.
+
 
 Then open the local URL displayed in the terminal (typically `http://localhost:5173`) in your web browser.
 
 ## 📜 Available Scripts
-Command	         Description
-npm run dev	      Starts the Vite development server
-npm run build	   Creates an optimized production build
-npm run preview	Serves the production build locally for preview
-npm run lint	   Runs ESLint to check the codebase for potential issues
+The following npm scripts are available in the project:
+- npm run dev — Starts the Vite development server for local development.
+- npm run build — Creates an optimized production build.
+- npm run preview — Serves the production build locally for preview.
+- npm run lint — Runs ESLint to check the codebase for potential issues.
 
 ## 🎨 Design Decisions
 The application uses CSS Modules to keep component-specific styles scoped and reduce the possibility of naming conflicts between components.
@@ -110,7 +111,9 @@ Todo validation is centralized in utils/todoValidation.js, allowing the same val
 - Notifications and reminder settings
 
 ## 📄 License
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
+
+The MIT License permits users to use, copy, modify, merge, publish, distribute, sublicense, and sell copies of the software, subject to the conditions of the license. The software is provided without warranty, as described in the MIT License.
 
 ## 📬 Contact
 GitHub: https://github.com/CTDLisaHoo

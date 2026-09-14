@@ -1,8 +1,28 @@
 /* features/Todos/TodoList/TodoList.module.css */
 
-/* Todo list */
 .todoList {
   padding: 0;
   margin: 0;
   list-style: none;
+}
+
+.emptyState {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.emptyState h2 {
+  margin: 0 0 8px;
+  color: var(--color-text);
+  font-size: 1.1rem;
+}
+
+.emptyState p {
+  margin: 0;
+  color: var(--color-muted);
 }
