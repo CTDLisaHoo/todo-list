@@ -1,0 +1,141 @@
+/* pages/LoginPage.module.css */
+
+.authFormScreen {
+display: flex;
+justify-content: center;
+padding: 32px 16px;
+}
+
+.authForm {
+width: 100%;
+max-width: 500px;
+padding: 24px;
+background-color: var(--color-surface);
+border: 1px solid var(--color-border);
+border-radius: var(--radius-md);
+box-shadow: var(--shadow-sm);
+}
+
+/* Email and password */
+.authForm label {
+display: inline-block;
+width: 100px;
+margin-right: 10px;
+color: var(--color-text);
+font-size: 14px;
+font-weight: 600;
+}
+
+.authForm input {
+width: calc(100% - 115px);
+min-height: 44px;
+padding: 8px 10px;
+border: 1px solid var(--color-border);
+border-radius: var(--radius-sm);
+background-color: var(--color-surface);
+color: var(--color-text);
+font: inherit;
+}
+
+.authForm input:focus {
+border-color: var(--color-primary);
+outline: 2px solid rgb(79 70 229 / 20%);
+outline-offset: 1px;
+}
+
+/* Space between email and password */
+.authForm label + input {
+margin-bottom: 12px;
+}
+
+/* Login button */
+.authButtons {
+margin-top: 4px;
+margin-left: 110px;
+}
+
+.authButtons button {
+width: 120px;
+min-height: 44px;
+padding: 8px 12px;
+border: none;
+border-radius: var(--radius-sm);
+background-color: var(--color-primary);
+color: #ffffff;
+font-family: inherit;
+font-size: 14px;
+font-weight: 500;
+cursor: pointer;
+}
+
+.authButtons button:hover {
+background-color: var(--color-primary-hover);
+}
+
+.authButtons button:disabled {
+background-color: #94a3b8;
+cursor: not-allowed;
+}
+
+.authButtons button:focus-visible {
+outline: 3px solid rgb(79 70 229 / 35%);
+outline-offset: 2px;
+}
+
+/* Error */
+.authErrorMessage {
+margin-bottom: 12px;
+padding: 8px 10px;
+border: 1px solid #fecaca;
+border-radius: var(--radius-sm);
+background-color: #fef2f2;
+color: var(--color-danger);
+}
+
+.authErrorMessage p {
+margin: 0;
+}
+
+.inputError {
+  margin: 0.25rem 0 0.75rem;
+  color: var(--color-danger);
+  font-size: 0.875rem;
+}
+
+input[aria-invalid='true'] {
+  border-color: var(--color-danger);
+}
+
+
+/* Mobile */
+@media (max-width: 480px) {
+.authFormScreen {
+padding: 20px 12px;
+}
+
+.authForm {
+padding: 20px;
+}
+
+.authForm label {
+display: block;
+width: 100%;
+margin-right: 0;
+margin-bottom: 4px;
+}
+
+.authForm input {
+width: 100%;
+min-height: 44px;
+margin-bottom: 12px;
+}
+
+.authButtons {
+margin-left: 0;
+}
+
+.authButtons button {
+width: 100%;
+min-height: 44px;
+}
+}

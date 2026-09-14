@@ -1,0 +1,153 @@
+/* features/Todos/TodoList/TodoListItem.module.css */
+
+/* Todo item */
+.todoItem {
+padding: 8px 12px;
+margin-bottom: 8px;
+background-color: var(--color-surface);
+border: 1px solid var(--color-border);
+border-radius: var(--radius-md);
+box-shadow: var(--shadow-sm);
+}
+
+/* Todo form layout */
+.todoItem form {
+display: flex;
+align-items: center;
+gap: 10px;
+width: 100%;
+}
+
+/* Checkbox */
+.checkbox {
+flex: 0 0 44px;
+width: 44px;
+height: 44px;
+margin: 0;
+cursor: pointer;
+accent-color: var(--color-primary);
+}
+
+/* Todo title */
+.todoTitle {
+flex: 1;
+min-width: 0;
+margin-right: 8px;
+color: var(--color-text);
+cursor: pointer;
+line-height: 1.5;
+overflow-wrap: anywhere;
+}
+
+/* Editing input */
+.editInput {
+flex: 1;
+min-width: 0;
+min-height: 44px;
+padding: 8px 10px;
+border: 1px solid var(--color-border);
+border-radius: var(--radius-sm);
+background-color: var(--color-surface);
+color: var(--color-text);
+font: inherit;
+}
+
+.editInput:focus {
+border-color: var(--color-primary);
+outline: 2px solid #bfdbfe;
+outline-offset: 1px;
+}
+
+/* Common button styling */
+.updateButton,
+.cancelButton,
+.deleteButton {
+min-height: 44px;
+padding: 8px 12px;
+border: none;
+border-radius: var(--radius-sm);
+color: #ffffff;
+font-family: inherit;
+font-size: 14px;
+font-weight: 500;
+line-height: 1.4;
+cursor: pointer;
+transition: background-color 0.15s ease;
+}
+
+/* Update button */
+.updateButton {
+background-color: var(--color-success);
+}
+
+.updateButton:hover {
+background-color: var(--color-success-hover);
+}
+
+/* Cancel button */
+.cancelButton {
+background-color: var(--color-secondary);
+}
+
+.cancelButton:hover {
+background-color: var(--color-secondary-hover);
+}
+
+/* Delete button */
+.deleteButton {
+background-color: var(--color-danger);
+}
+
+.deleteButton:hover {
+background-color: var(--color-danger-hover);
+}
+
+/* Disabled update button */
+.updateButton:disabled {
+background-color: #94a3b8;
+cursor: not-allowed;
+}
+
+/* Keyboard focus */
+.updateButton:focus-visible,
+.cancelButton:focus-visible {
+outline: 3px solid #bfdbfe;
+outline-offset: 2px;
+}
+
+.deleteButton:focus-visible {
+outline: 3px solid #fca5a5;
+outline-offset: 2px;
+}
+
+/* Tablet and mobile */
+@media (max-width: 640px) {
+.todoItem {
+padding: 8px;
+}
+
+.todoItem form {
+gap: 8px;
+}
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+.todoItem form {
+flex-wrap: wrap;
+}
+
+.todoTitle,
+.editInput {
+min-width: calc(100% - 52px);
+}
+
+.updateButton,
+.cancelButton,
+.deleteButton {
+flex: 1 1 auto;
+min-height: 44px;
+padding: 8px 10px;
+font-size: 14px;
+}
+}

@@ -1,4 +1,6 @@
-//shared/TextInputWithLabel
+//shared/TextInputWithLabel.jsx
+
+import styles from './TextInputWithLabel.module.css';
 
 function TextInputWithLabel({
   elementId,
@@ -9,8 +11,9 @@ function TextInputWithLabel({
 }) {
   return (
     <>
-      <label htmlFor={elementId}>{labelText}</label>
-      <input
+      <label className={styles.label} htmlFor={elementId}>{labelText}</label>
+      <input 
+        className={styles.input}
         type="text"
         id={elementId}
         ref={ref}

@@ -1,0 +1,62 @@
+/* pages/NotFoundPage.module.css */
+
+.notFoundPage {
+width: min(100% - 32px, 760px);
+margin: 0 auto;
+padding: 48px 0;
+text-align: center;
+color: var(--color-text);
+}
+
+.title {
+margin: 0 0 16px;
+font-size: 2rem;
+}
+
+.message {
+margin-bottom: 24px;
+color: var(--color-muted);
+}
+
+.message code {
+color: var(--color-danger);
+}
+
+.navigation {
+display: flex;
+justify-content: center;
+gap: 16px;
+flex-wrap: wrap;
+}
+
+.navigation a {
+display: inline-flex;
+align-items: center;
+min-height: 44px;
+padding: 8px 12px;
+color: var(--color-primary);
+text-decoration: none;
+font-weight: 500;
+}
+
+.navigation a:hover {
+color: var(--color-primary-hover);
+text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+.notFoundPage {
+width: min(100% - 24px, 760px);
+padding: 32px 0;
+}
+
+.navigation {
+flex-direction: column;
+align-items: center;
+gap: 12px;
+}
+
+.navigation a {
+min-height: 44px;
+}
+}

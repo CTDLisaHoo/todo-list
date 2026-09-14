@@ -1,67 +1,79 @@
-//features/Todos/TodoList/TodoList.jsx
+// features/Todos/TodoList/TodoList.jsx
 
 import { useMemo } from 'react';
 import TodoListItem from './TodoListItem.jsx';
+import styles from './TodoList.module.css';
 
 function TodoList({
   todoList,
   onCompleteTodo,
   onUpdateTodo,
-  dataVersion,
+  onDeleteTodo,
   statusFilter = 'active',
 }) {
   const filteredTodoList = useMemo(() => {
-    
-    let filteredTodos;
-
     switch (statusFilter) {
       case 'completed':
-        filteredTodos = todoList.filter((todo) => todo.isCompleted);
-        break;
+        return todoList.filter((todo) => todo.isCompleted);
+
       case 'active':
-        filteredTodos = todoList.filter((todo) => !todo.isCompleted);
-        break;
+        return todoList.filter((todo) => !todo.isCompleted);
+
       case 'all':
       default:
-        filteredTodos = todoList;
-        break;
+        return todoList;
     }
-
-    return {
-      version: dataVersion,
-      todos: filteredTodos,
-    };
-  }, [todoList, dataVersion, statusFilter]);
+  }, [todoList, statusFilter]);
 
   const getEmptyMessage = () => {
     switch (statusFilter) {
       case 'completed':
-        return 'No completed todos yet. Complete some tasks to see them here.';
+        return {
+          title: 'No completed todos',
+          message:
+            'Complete some tasks to see them here.',
+        };
+
       case 'active':
-        return 'No active todos. Add a todo above to get started.';
+        return {
+          title: 'No active todos',
+          message:
+            'Add a todo above to get started.',
+        };
+
       case 'all':
       default:
-        return 'Add todo above to get started.';
+        return {
+          title: 'No todos yet',
+          message:
+            'Add a todo above to get started.',
+        };
     }
   };
 
+  if (filteredTodoList.length === 0) {
+    const emptyMessage = getEmptyMessage();
+
+    return (
+      <section className={styles.emptyState} aria-live="polite">
+        <h2>{emptyMessage.title}</h2>
+        <p>{emptyMessage.message}</p>
+      </section>
+    );
+  }
+
   return (
-    <>
-      {filteredTodoList.todos.length === 0 ? (
-        <p>{getEmptyMessage()}</p>
-      ) : (
-        <ul>
-          {filteredTodoList.todos.map((todo) => (
-            <TodoListItem
-              key={todo.id}
-              todo={todo}
-              onCompleteTodo={onCompleteTodo}
-              onUpdateTodo={onUpdateTodo}
-            />
-          ))}
-        </ul>
-      )}
-    </>
+    <ul className={styles.todoList}>
+      {filteredTodoList.map((todo) => (
+        <TodoListItem
+          key={todo.id}
+          todo={todo}
+          onCompleteTodo={onCompleteTodo}
+          onUpdateTodo={onUpdateTodo}
+          onDeleteTodo={onDeleteTodo}
+        />
+      ))}
+    </ul>
   );
 }
 

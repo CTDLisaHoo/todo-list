@@ -1,0 +1,37 @@
+/* features/Logoff.module.css */
+
+/* Logout button */
+.logoutButton {
+min-height: 44px;
+padding: 8px 12px;
+border: none;
+border-radius: var(--radius-sm);
+background-color: var(--color-secondary-hover);
+color: #ffffff;
+font-family: inherit;
+font-size: 14px;
+font-weight: 500;
+line-height: 1.4;
+cursor: pointer;
+transition: background-color 0.15s ease;
+}
+
+.logoutButton:hover {
+background-color: #334155;
+}
+
+.logoutButton:disabled {
+background-color: #94a3b8;
+cursor: not-allowed;
+}
+
+.logoutButton:focus-visible {
+outline: 3px solid #cbd5e1;
+outline-offset: 2px;
+}
+
+/* Logout error */
+.logoutError {
+margin-bottom: 10px;
+color: var(--color-danger);
+}

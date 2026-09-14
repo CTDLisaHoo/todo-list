@@ -1,0 +1,18 @@
+/* App.module.css */
+
+.app {
+min-height: 100vh;
+}
+
+.main {
+width: min(100% - 32px, 960px);
+margin: 0 auto;
+padding: 32px 0 64px;
+}
+
+@media (max-width: 640px) {
+.main {
+width: min(100% - 24px, 960px);
+padding: 20px 0 40px;
+}
+}

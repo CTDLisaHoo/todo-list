@@ -1,5 +1,7 @@
 //contexts/AuthContext.jsx
 
+/* eslint-disable react-refresh/only-export-components */
+
 import { createContext, useContext, useState } from 'react';
 
 // Create the context
@@ -51,7 +53,7 @@ export function AuthProvider({ children }) {
         success: false,
         error: `Authentication failed: ${data?.message}`,
       };
-    } catch (error) {
+    } catch {
       return {
         success: false,
         error: 'Network error during login',
@@ -88,7 +90,7 @@ export function AuthProvider({ children }) {
         success: false,
         error: 'Logout failed',
       };
-    } catch (error) {
+    } catch {
       return {
         success: false,
         error: 'Network error during logout',

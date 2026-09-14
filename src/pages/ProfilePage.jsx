@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import styles from './ProfilePage.module.css';
 
 function ProfilePage() {
   const { email, token } = useAuth();
@@ -64,31 +65,55 @@ function ProfilePage() {
     total > 0 ? Math.round((completed / total) * 100) : 0;
 
   return (
-    <div>
-      <h1>Profile</h1>
+    <main className={styles.profilePage}>
+      <h1 className={styles.title}>Profile</h1>
 
-      <h2>User Information</h2>
-      <p>Name: {email}</p>
-      <p>Status: {token ? 'Authenticated' : 'Not authenticated'}</p>
+      <section className={styles.section}>
+        <h2>User Information</h2>
+        <p>
+          <strong>Name:</strong> {email}
+        </p>
+        <p>
+          <strong>Status:</strong>{' '}
+           {token ? 'Authenticated' : 'Not authenticated'}
+        </p>
+       </section>
 
-      <h2>Todo Statistics</h2>
+       <section className={styles.section}>
+        <h2>Todo Statistics</h2>
 
-      {loading && <p>Loading statistics...</p>}
+        {loading && (
+          <p className={styles.loading}>Loading statistics...</p>
+        )}
 
-      {error && <p>{error}</p>}
+        {error && (
+          <p className={styles.error}>{error}</p>
+        )}
 
-      {!loading && !error && (
-        <div>
-          <p>Total: {total}</p>
-          <p>Completed: {completed}</p>
-          <p>Active: {active}</p>
+        {!loading && !error && (
+          <div className={styles.stats}>
+            <p>
+              <strong>Total:</strong> {total}
+            </p>
 
-          {total > 0 && (
-            <p>Completion: {completionPercentage}%</p>
-          )}
-        </div>
-      )}
-    </div>
+            <p>
+              <strong>Completed:</strong> {completed}
+            </p>
+
+            <p>
+              <strong>Active:</strong> {active}
+            </p>
+
+            {total > 0 && (
+              <p>
+                <strong>Completion:</strong>{' '}
+                {completionPercentage}%
+              </p>
+            )}
+          </div>
+        )}
+      </section>
+    </main>
   );
 }
 

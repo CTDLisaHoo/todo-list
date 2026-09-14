@@ -1,5 +1,7 @@
 //shared/SortBy.jsx
 
+import styles from './SortBy.module.css';
+
 function SortBy({
   sortBy,
   sortDirection,
@@ -7,8 +9,8 @@ function SortBy({
   onSortDirectionChange,
 }) {
   return (
-    <div>
-      <div>
+    <div className={styles.sortBy}>
+      <div className={styles.field}>
         <label htmlFor="sortBy">Sort by</label>
         <select
           id="sortBy"
@@ -20,7 +22,7 @@ function SortBy({
         </select>
       </div>
 
-      <div>
+      <div className={styles.field}>
         <label htmlFor="sortDirection">Order</label>
         <select
           id="sortDirection"
