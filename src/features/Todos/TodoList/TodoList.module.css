@@ -1,0 +1,8 @@
+/* features/Todos/TodoList/TodoList.module.css */
+
+/* Todo list */
+.todoList {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}

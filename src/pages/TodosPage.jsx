@@ -14,6 +14,7 @@ import {
 import { useAuth } from '../contexts/AuthContext';
 import { useSearchParams } from 'react-router';
 import StatusFilter from '../shared/StatusFilter';
+import styles from './TodosPage.module.css';
 
 function TodosPage() {
   const { token } = useAuth();
@@ -297,6 +298,59 @@ function TodosPage() {
   };
 
   // --------------------------------
+  // DELETE TODO
+  // --------------------------------
+  const deleteTodo = async (id) => {
+  const originalTodo = todoList.find((todo) => todo.id === id);
+
+  if (!originalTodo) {
+    dispatch({
+      type: TODO_ACTIONS.SET_ERROR,
+      payload: {
+        message: 'Unable to find this todo. Please try again.',
+      },
+    });
+
+    return;
+  }
+
+  dispatch({
+    type: TODO_ACTIONS.DELETE_TODO_START,
+    payload: { id },
+  });
+
+  try {
+    const response = await fetch(`/api/tasks/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'X-CSRF-TOKEN': token,
+      },
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      throw new Error(`Delete failed: ${response.status}`);
+    }
+
+    dispatch({
+      type: TODO_ACTIONS.DELETE_TODO_SUCCESS,
+      payload: { id },
+    });
+    } catch (error) {
+      console.log('DELETE ERROR:', error);
+
+      dispatch({
+        type: TODO_ACTIONS.DELETE_TODO_ERROR,
+        payload: {
+          id,
+          originalTodo,
+          error: error.message,
+        },
+      });
+    }
+  };
+
+  // --------------------------------
   // RESET FILTERS
   // --------------------------------
   const resetFilters = () => {
@@ -306,7 +360,7 @@ function TodosPage() {
   };
 
   return (
-    <div>
+    <main className={styles.todosPage}>
       {error && (
         <div>
           <p>{error}</p>
@@ -383,10 +437,11 @@ function TodosPage() {
         todoList={todoList}
         onCompleteTodo={completeTodo}
         onUpdateTodo={updateTodo}
+        onDeleteTodo={deleteTodo}
         dataVersion={dataVersion}
         statusFilter={statusFilter}
       />
-    </div>
+    </main>
   );
 }
 

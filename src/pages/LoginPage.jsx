@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
+import styles from './LoginPage.module.css';
 
 function LoginPage() {
   const { login, isAuthenticated } = useAuth();
@@ -39,10 +40,10 @@ function LoginPage() {
   }
 
   return (
-    <div className="authFormScreen">
-      <form className="authForm" onSubmit={handleSubmit}>
+    <div className={styles.authFormScreen}>
+      <form className={styles.authForm} onSubmit={handleSubmit}>
         {authError && (
-          <div className="authErrorMessage">
+          <div className={styles.authErrorMessage}>
             <p>{authError}</p>
           </div>
         )}
@@ -65,7 +66,7 @@ function LoginPage() {
           required
         />
 
-        <div className="authButtons">
+        <div className={styles.authButtons}>
           <button disabled={isLoggingOn} type="submit">
             {isLoggingOn ? 'Logging in...' : 'Log On'}
           </button>

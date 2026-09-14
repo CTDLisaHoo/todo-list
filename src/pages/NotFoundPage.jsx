@@ -1,20 +1,25 @@
 //pages/NotFoundPage.jsx
 
 import { Link, useLocation } from 'react-router';
+import styles from './NotFoundPage.module.css';
 
 function NotFoundPage() {
   const {pathname} = useLocation();
 
   return (
-    <section>
-      <h2>404: Not Found</h2>
-      <p><code>{pathname}</code> does not exist.</p>
-      <nav>
-        <Link to="/">HomePage</Link>
-        <Link to="/about">AboutPage</Link>
-        <Link to="/login">LoginPage</Link>
-      </nav>
-    </section>
+    <main className={styles.notFoundPage}>
+      <h1 className={styles.title}>404: Not Found</h1>
+
+        <p className={styles.message}>
+          <code>{pathname}</code> does not exist.
+        </p>
+
+        <nav className={styles.navigation}>
+          <Link to="/">HomePage</Link>
+          <Link to="/about">AboutPage</Link>
+          <Link to="/login">LoginPage</Link>
+        </nav>
+    </main>
   );
 }
 

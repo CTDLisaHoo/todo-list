@@ -1,6 +1,6 @@
 //App.jsx
 
-import './App.css';
+import styles from './App.module.css';
 import { Routes, Route } from 'react-router';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -13,12 +13,15 @@ import Header from './shared/Header';
 
 function App() {
   return (
-    <>
-      <Header />
+  <div className={styles.app}>
+  <Header />
+
+    <main className={styles.main}>
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/login' element={<LoginPage />} />
+
         <Route
           path='/todos'
           element={
@@ -27,6 +30,7 @@ function App() {
             </RequireAuth>
           }
         />
+
         <Route
           path='/profile'
           element={
@@ -35,9 +39,12 @@ function App() {
             </RequireAuth>
           }
         />
+
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
-    </>
+    </main>
+  </div>
+
   );
 }
 

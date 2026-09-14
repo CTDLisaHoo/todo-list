@@ -1,0 +1,42 @@
+/* shared/FilterInput.module.css */
+
+.filterInput {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 20px;
+}
+
+.filterInput label {
+font-weight: 600;
+color: var(--color-text);
+}
+
+.filterInput input {
+flex: 1;
+min-height: 44px;
+padding: 8px 10px;
+border: 1px solid var(--color-border);
+border-radius: var(--radius-sm);
+background-color: var(--color-surface);
+color: var(--color-text);
+font: inherit;
+}
+
+.filterInput input:focus {
+border-color: var(--color-primary);
+outline: 2px solid rgb(79 70 229 / 15%);
+outline-offset: 1px;
+}
+
+@media (max-width: 640px) {
+.filterInput {
+flex-direction: column;
+align-items: stretch;
+gap: 6px;
+}
+
+.filterInput input {
+width: 100%;
+}
+}

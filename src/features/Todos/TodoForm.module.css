@@ -1,0 +1,60 @@
+/* features/Todos/TodoForm.module.css */
+
+/* Todo form */
+.todoForm {
+display: flex;
+align-items: flex-end;
+gap: 10px;
+margin-bottom: 20px;
+}
+
+/* Add button */
+.addButton {
+min-height: 44px;
+padding: 8px 12px;
+border: none;
+border-radius: var(--radius-sm);
+background-color: var(--color-primary);
+color: #ffffff;
+font-family: inherit;
+font-size: 14px;
+font-weight: 500;
+line-height: 1.4;
+cursor: pointer;
+transition: background-color 0.15s ease;
+}
+
+.addButton:hover {
+background-color: var(--color-primary-hover);
+}
+
+.addButton:disabled {
+background-color: #94a3b8;
+cursor: not-allowed;
+}
+
+.addButton:focus-visible {
+outline: 3px solid #bfdbfe;
+outline-offset: 2px;
+}
+
+/* Tablet and mobile */
+@media (max-width: 640px) {
+.todoForm {
+gap: 8px;
+}
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+.todoForm {
+align-items: stretch;
+margin-bottom: 16px;
+}
+
+.addButton {
+min-height: 44px;
+padding: 8px 12px;
+font-size: 14px;
+}
+}

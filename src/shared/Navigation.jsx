@@ -2,30 +2,21 @@
 
 import { NavLink } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
+import styles from './Navigation.module.css';
 
 function Navigation() {
   const { isAuthenticated } = useAuth();
 
-  const navLinkStyles = ({ isActive }) => ({
-    fontWeight: isActive ? 700 : 400,
-    textDecoration: isActive ? 'underline' : 'none',
-    padding: '2px 6px',
-    borderRadius: 6,
-    backgroundColor: isActive ? '#eee' : 'transparent',
-  });
-
+  const navLinkStyles = ({ isActive }) => 
+    isActive 
+      ? `${styles.navLink} ${styles.active}`
+      : styles.navLink;
+    
   return (
-    <nav>
-      <ul
-        style={{
-          listStyle: 'none',
-          display: 'flex',
-          gap: '1rem',
-          padding: 0,
-        }}
-      >
+    <nav className={styles.navigation}>
+      <ul className={styles.navList}>
         <li>
-          <NavLink style={navLinkStyles} to="/about">
+          <NavLink className={navLinkStyles} to="/about">
             AboutPage
           </NavLink>
         </li>
@@ -33,20 +24,20 @@ function Navigation() {
         {isAuthenticated ? (
           <>
             <li>
-              <NavLink style={navLinkStyles} to="/todos">
+              <NavLink className={navLinkStyles} to="/todos">
                 TodosPage
               </NavLink>
             </li>
 
             <li>
-              <NavLink style={navLinkStyles} to="/profile">
+              <NavLink className={navLinkStyles} to="/profile">
                 ProfilePage
               </NavLink>
             </li>
           </>
         ) : (
           <li>
-            <NavLink style={navLinkStyles} to="/login">
+            <NavLink className={navLinkStyles} to="/login">
               LoginPage
             </NavLink>
           </li>
