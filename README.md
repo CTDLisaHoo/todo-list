@@ -92,21 +92,23 @@ The following npm scripts are available in the project:
 - npm run lint — Runs ESLint to check the codebase for potential issues.
 
 ## 🎨 Design Decisions
-The application uses CSS Modules to keep component-specific styles scoped and reduce the possibility of naming conflicts between components.
+I chose **CSS Modules** for styling because they keep styles scoped to individual components and pages. This helps prevent class-name conflicts and makes the application easier to maintain as it grows.
 
-Shared design values such as colors, spacing, borders, and shadows are managed using CSS variables to maintain visual consistency throughout the application.
+I organized the styling into separate **.module.css** files for shared components, Todo components, and pages. I also use global CSS variables in index.css for common colors, borders, border radii, and shadows to keep the visual design consistent throughout the application.
 
-The layout uses responsive CSS media queries to provide an optimized experience across desktop, tablet, and mobile screen sizes. Interactive controls include hover states, focus indicators, disabled states, and touch-friendly sizing to improve usability and accessibility.
+The application uses a simple and consistent color scheme to distinguish primary actions, successful actions, errors, and secondary actions. Consistent spacing, typography, borders, and shadows are used to create a clean and professional interface.
 
-Todo validation is centralized in utils/todoValidation.js, allowing the same validation rules to be reused when adding and editing todo items. This helps keep validation behavior consistent throughout the application.
+I designed the application to be responsive across desktop, tablet, and mobile screen sizes using CSS media queries. Buttons, checkboxes, and other interactive controls use touch-friendly sizing, and visible focus styles are provided to support keyboard navigation.
+
+The application also includes loading, error, and empty states to give users clear feedback when data is being loaded, when an operation fails, or when there are no todos to display.
+
+Accessibility was considered throughout the interface by using semantic HTML, labels for form controls, accessible error messages, keyboard focus indicators, and appropriate ARIA attributes where needed.
 
 ## 🔮 Future Improvements
 - Todo due dates and reminders
 - Categories or tags for organizing todos
-- Dark mode
 - Automated unit and integration tests
 - Improved authentication and account management
-- Persistent cloud-based todo storage
 - Todo priority levels
 - Notifications and reminder settings
 

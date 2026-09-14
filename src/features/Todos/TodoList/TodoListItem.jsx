@@ -69,6 +69,7 @@ function TodoListItem({ todo, onCompleteTodo, onUpdateTodo, onDeleteTodo }) {
               value={workingTitle}
               maxLength={MAX_TODO_TITLE_LENGTH}
               onChange={handleEdit}
+              className={styles.editInput}
             />
 
             {error && (
