@@ -56,7 +56,10 @@ function TodoForm({ onAddTodo }) {
       <button
         type="submit"
         className={styles.addButton}
-        disabled={!isValidTodoTitle(workingTodoTitle)}
+        disabled={
+            !isValidTodoTitle(workingTodoTitle) ||
+            workingTodoTitle.trim().length >= MAX_TODO_TITLE_LENGTH
+        }
       >
         Add Todo
       </button>
